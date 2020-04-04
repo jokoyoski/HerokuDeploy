@@ -39,7 +39,7 @@ public class UserController {
 
         if(!validateRequest.equals("validate"))
         {
-            ServerErrorResponse serverErrorResponse=new ServerErrorResponse(validateRequest + " is required" );
+            ServerErrorResponse serverErrorResponse=new ServerErrorResponse(validateRequest);
 
             return new ResponseEntity<ServerErrorResponse>(serverErrorResponse, HttpStatus.BAD_REQUEST);
         }

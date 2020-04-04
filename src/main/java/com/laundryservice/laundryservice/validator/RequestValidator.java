@@ -1,6 +1,7 @@
 package com.laundryservice.laundryservice.validator;
 
 import com.laundryservice.laundryservice.domain.UserRegistrationRequest;
+import com.laundryservice.laundryservice.exception.PasswordNotEqualException;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Component;
 
@@ -11,37 +12,41 @@ public class RequestValidator {
 
         if(Strings.isBlank(userRegistrationRequest.getFirstName()))
         {
-            return "firstName";
+            return "Provide a valid firstName";
         }
 
         if(Strings.isBlank(userRegistrationRequest.getLastName()))
         {
-            return "lastName";
+            return "Provide a valid lastName";
         }
 
         if(Strings.isBlank(userRegistrationRequest.getEmail()))
         {
-            return "email";
+            return "Provide a valid email";
         }
 
         if(Strings.isBlank(userRegistrationRequest.getPassword()))
         {
-            return "password";
+            return "Provide a valid password";
         }
 
         if(Strings.isBlank(userRegistrationRequest.getConfirmPassword()))
         {
-            return "confirmPassword";
+            return "Provide a valid confirmPassword";
         }
 
         if(Strings.isBlank(userRegistrationRequest.getPhoneNumber()))
         {
-            return "phone Number";
+            return "Provide a valid phone Number";
         }
 
         if(Strings.isBlank(userRegistrationRequest.getAddress()))
         {
-            return "Address";
+            return "Provide a valid Address";
+        }
+        if(!userRegistrationRequest.getPassword().equals(userRegistrationRequest.getConfirmPassword()))
+        {
+          return "Your password and confirm password are not equal";
         }
       return "validate";
     };

@@ -35,10 +35,7 @@ public class UserRegistration implements IUserRegistration {
             throw new DuplicateRecordException("user with the email already exist");
         }
 
-        if(!userRegistrationRequest.getPassword().equals(userRegistrationRequest.getConfirmPassword()))
-        {
-            throw new PasswordNotEqualException("Your password and confirm password are not equal");
-        }
+
 
         userRegistrationRequest.setPassword (decryptBase64Password.decrypt(userRegistrationRequest.getPassword()));
         bCryptPasswordEncoder.encode(userRegistrationRequest.getPassword());
