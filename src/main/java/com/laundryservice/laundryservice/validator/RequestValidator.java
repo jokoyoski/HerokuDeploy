@@ -41,7 +41,7 @@ public class RequestValidator {
 
         if(Strings.isBlank(userRegistrationRequest.getAddress()))
         {
-            return "address";
+            return "Address";
         }
       return "validate";
     };
