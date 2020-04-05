@@ -46,7 +46,7 @@ public class RequestValidator {
         }
         if(!userRegistrationRequest.getPassword().equals(userRegistrationRequest.getConfirmPassword()))
         {
-          return "Your password and confirm password are not equal";
+          return "Your password and Confirm password are not equal";
         }
       return "validate";
     };
