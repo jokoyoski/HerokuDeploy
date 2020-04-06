@@ -30,8 +30,7 @@ public class UserController {
     private RequestValidator requestValidator;
 
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody UserRegistrationRequest user, BindingResult result) throws Exception {
 
@@ -44,6 +43,12 @@ public class UserController {
             return new ResponseEntity<ServerErrorResponse>(serverErrorResponse, HttpStatus.BAD_REQUEST);
         }
         String userValue=userRegistration.saveUser(user);
+        if(userValue=="Error Converting Your Password")
+        {
+            ServerPostResponse serverErrorResponse=new ServerPostResponse();
+            serverErrorResponse.setDescription(userValue);
+            return new ResponseEntity<ServerPostResponse>(serverErrorResponse, HttpStatus.BAD_REQUEST);
+        }
 
         ServerPostResponse serverErrorResponse=new ServerPostResponse();
          serverErrorResponse.setDescription("User information saved successfully");

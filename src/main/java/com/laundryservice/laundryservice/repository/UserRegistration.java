@@ -10,6 +10,8 @@ import com.laundryservice.laundryservice.sql.CreateUser;
 import com.laundryservice.laundryservice.sql.GetUserByEmail;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -36,12 +38,24 @@ public class UserRegistration implements IUserRegistration {
         }
 
 
+      try{
+          var passwordEncode=decryptBase64Password.decrypt(userRegistrationRequest.getPassword());
 
-        userRegistrationRequest.setPassword (decryptBase64Password.decrypt(userRegistrationRequest.getPassword()));
-        bCryptPasswordEncoder.encode(userRegistrationRequest.getPassword());
+          var bCryptPassword=bCryptPasswordEncoder.encode(passwordEncode);
+          userRegistrationRequest.setPassword(bCryptPassword);
+
+      }catch(Exception e){
+          return "Error Converting Your Password";
+        }
 
         var insertUser=createUser.InsertUser(userRegistrationRequest);
 
         return insertUser;
+    }
+
+    @Override
+    public User loadUserByUsername(String s) throws UsernameNotFoundException {
+        var userInfo=getUserByEmail.GetUserInfo(s);
+        return userInfo;
     }
 }
