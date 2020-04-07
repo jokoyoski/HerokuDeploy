@@ -66,7 +66,7 @@ public class CreateUser {
             // ORA-01403: no data found, or any java.sql.SQLException
             System.err.println(e.getMessage());
 
-            return e.getMessage();
+            return  "Your information could not be saved at the moment, please try again";
         }
         return "User saved successfully";
     }

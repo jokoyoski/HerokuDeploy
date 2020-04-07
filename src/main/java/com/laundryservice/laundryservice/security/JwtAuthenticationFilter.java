@@ -83,15 +83,15 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         Map<String, Object> claims =new HashMap<>();
 
 
-        claims.put("id",(Long.toString(userModel.getId())));
+
         claims.put("username",userModel.getEmail());
 
         Date now=new Date(System.currentTimeMillis());
         var expire=Long.parseLong(this.environment.getProperty("token-expire"));
         var expireAt= new Date(System.currentTimeMillis()+ expire);
-        String userId=Long.toString(userModel.getId());
 
-        String token=  Jwts.builder().setSubject(userId).setClaims(claims).setIssuedAt(now)
+
+        String token=  Jwts.builder().setSubject(userModel.getEmail()).setClaims(claims).setIssuedAt(now)
                 .setExpiration(expireAt).signWith(SignatureAlgorithm.HS256,this.environment.getProperty("SECRET")).compact();
         resp.addHeader("token", token);
 

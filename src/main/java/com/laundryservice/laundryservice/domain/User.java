@@ -7,7 +7,7 @@ import java.util.Collection;
 
 public class User implements UserDetails {
 
-    private int id;
+
 
    private String firstName;
 
@@ -17,13 +17,7 @@ public class User implements UserDetails {
 
    private String password;
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;

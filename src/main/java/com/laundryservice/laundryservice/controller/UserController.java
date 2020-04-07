@@ -51,7 +51,7 @@ public class UserController {
         }
 
         ServerPostResponse serverErrorResponse=new ServerPostResponse();
-         serverErrorResponse.setDescription("User information saved successfully");
+         serverErrorResponse.setDescription(userValue);
         return new ResponseEntity<ServerPostResponse>(serverErrorResponse, HttpStatus.CREATED);
 
     }

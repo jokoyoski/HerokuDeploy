@@ -36,7 +36,8 @@ public class WebSecurity  extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity)throws Exception{
         httpSecurity.csrf().disable();                                                                                                          //this is how to register our custom auth filter
         httpSecurity.authorizeRequests().antMatchers("/api/user/**").permitAll()
-                .anyRequest().authenticated().and().addFilter(getAuthenticationFilter());
+                .anyRequest().authenticated().and().addFilter(getAuthenticationFilter()).addFilter
+                (new AuthorizationFilter(authenticationManager(),environment));
 
     }
 
